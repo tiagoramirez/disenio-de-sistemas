@@ -1,7 +1,8 @@
 package domain;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 import domain.persona.Alumno;
 import domain.universidad.Inscripcion;
@@ -28,7 +29,7 @@ public class InscripcionTest {
         Inscripcion anio2023=new Inscripcion(yo);
         anio2023.setMaterias(am2,dds);
 
-        Assert.assertEquals(true, anio2023.aprobada());
+        assertEquals(true, anio2023.aprobada());
     }
 
     @Test
@@ -50,6 +51,6 @@ public class InscripcionTest {
         Inscripcion anio2023=new Inscripcion(yo);
         anio2023.setMaterias(am2,dds);
 
-        Assert.assertEquals(false, anio2023.aprobada());
+        assertEquals(false, anio2023.aprobada());
     }
 }
