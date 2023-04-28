@@ -7,10 +7,17 @@ import com.example.domain.catalogo.Cancion;
 import com.example.domain.helpers.Icono;
 
 public class EnTendencia extends Popularidad {
+
+  public static Integer maxHorasSinEscucharEnPopularidad = 24;
+
+  private boolean superaMaxHorasSinEscuchar(Cancion cancion) {
+    Long horasDesdeUltVezEscuchada = ChronoUnit.HOURS.between(cancion.getUltVezEscuchada(), LocalDateTime.now());
+    return horasDesdeUltVezEscuchada > maxHorasSinEscucharEnPopularidad;
+  }
+
   @Override
   public void reproducir(Cancion cancion) {
-    Long horasDesdeUltVezEscuchada = ChronoUnit.HOURS.between(cancion.getUltVezEscuchada(), LocalDateTime.now());
-    if (horasDesdeUltVezEscuchada > 24) {
+    if (superaMaxHorasSinEscuchar(cancion)) {
       cancion.setPopularidad(new Normal(cancion.getCantReproducciones()));
     }
   }

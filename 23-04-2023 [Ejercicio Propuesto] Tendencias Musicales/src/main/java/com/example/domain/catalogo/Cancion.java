@@ -2,6 +2,7 @@ package com.example.domain.catalogo;
 
 import java.time.LocalDateTime;
 
+import com.example.domain.tendencias.Normal;
 import com.example.domain.tendencias.Popularidad;
 
 import lombok.Getter;
@@ -17,6 +18,14 @@ public class Cancion {
   private Integer cantLikes;
   private Integer cantDislikes;
   private LocalDateTime ultVezEscuchada;
+
+  public Cancion() {
+    this.popularidad = new Normal(0);
+    this.cantReproducciones = 0;
+    this.cantLikes = 0;
+    this.cantDislikes = 0;
+    this.ultVezEscuchada = LocalDateTime.now();
+  }
 
   public void reproducir() {
     cantReproducciones++;

@@ -5,6 +5,10 @@ import com.example.domain.helpers.Icono;
 
 public class EnAuge extends Popularidad {
 
+  public static Integer maxReproduccionesEnPopularidad = 50000;
+  public static Integer maxLikesEnPopularidad = 20000;
+  public static Integer maxDislikesEnPopularidad = 5000;
+
   private Integer cantDislikesEnPopularidad;
   private Integer cantReproduccionesIniciales;
 
@@ -17,11 +21,23 @@ public class EnAuge extends Popularidad {
     return cancion.getCantReproducciones() - cantReproduccionesIniciales;
   }
 
+  private boolean superaMaxReproducciones(Cancion cancion) {
+    return cantReproduccionesEnPopularidad(cancion) > maxReproduccionesEnPopularidad;
+  }
+
+  private boolean superaMaxLikes(Cancion cancion) {
+    return cancion.getCantLikes() > maxLikesEnPopularidad;
+  }
+
+  private boolean superaMaxDislikes() {
+    return cantDislikesEnPopularidad > maxDislikesEnPopularidad;
+  }
+
   @Override
   public void reproducir(Cancion cancion) {
-    if (cantReproduccionesEnPopularidad(cancion) > 50000 && cancion.getCantLikes() < 20000) {
+    if (superaMaxReproducciones(cancion) && superaMaxLikes(cancion)) {
       cancion.setPopularidad(new EnTendencia());
-    } else if (cantDislikesEnPopularidad > 5000) {
+    } else if (superaMaxDislikes()) {
       cancion.setPopularidad(new Normal(cancion.getCantReproducciones()));
     }
   }

@@ -5,6 +5,8 @@ import com.example.domain.helpers.Icono;
 
 public class Normal extends Popularidad {
 
+  public static Integer maxReproduccionesEnPopularidad = 1000;
+
   private Integer cantReproduccionesIniciales;
 
   public Normal(Integer cantReproducciones) {
@@ -15,9 +17,13 @@ public class Normal extends Popularidad {
     return cancion.getCantReproducciones() - cantReproduccionesIniciales;
   }
 
+  private boolean superaMaxReproducciones(Cancion cancion) {
+    return cantReproduccionesEnPopularidad(cancion) > maxReproduccionesEnPopularidad;
+  }
+
   @Override
   public void reproducir(Cancion cancion) {
-    if (cantReproduccionesEnPopularidad(cancion) > 1000) {
+    if (superaMaxReproducciones(cancion)) {
       cancion.setPopularidad(new EnAuge(cancion.getCantReproducciones()));
     }
   }
