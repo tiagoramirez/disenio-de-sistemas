@@ -1,11 +1,18 @@
 package com.example.domain.tendencias;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+
 import com.example.domain.catalogo.Cancion;
 import com.example.domain.helpers.Icono;
 
 public class EnTendencia extends Popularidad {
   @Override
   public void reproducir(Cancion cancion) {
+    Long horasDesdeUltVezEscuchada = ChronoUnit.HOURS.between(cancion.getUltVezEscuchada(), LocalDateTime.now());
+    if (horasDesdeUltVezEscuchada > 24) {
+      cancion.setPopularidad(new Normal(cancion.getCantReproducciones()));
+    }
   }
 
   @Override
