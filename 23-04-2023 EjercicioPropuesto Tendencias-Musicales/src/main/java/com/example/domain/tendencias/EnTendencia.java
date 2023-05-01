@@ -6,12 +6,17 @@ import java.time.temporal.ChronoUnit;
 import com.example.domain.catalogo.Cancion;
 import com.example.domain.helpers.Icono;
 
+import lombok.Setter;
+
 public class EnTendencia extends Popularidad {
 
   public static Integer maxHorasSinEscucharEnPopularidad = 24;
 
+  @Setter
+  private LocalDateTime fechaActualParaSimular = LocalDateTime.now();
+
   private boolean superaMaxHorasSinEscuchar(Cancion cancion) {
-    Long horasDesdeUltVezEscuchada = ChronoUnit.HOURS.between(cancion.getUltVezEscuchada(), LocalDateTime.now());
+    Long horasDesdeUltVezEscuchada = ChronoUnit.HOURS.between(cancion.getUltVezEscuchada(), fechaActualParaSimular);
     return horasDesdeUltVezEscuchada > maxHorasSinEscucharEnPopularidad;
   }
 
@@ -33,6 +38,6 @@ public class EnTendencia extends Popularidad {
     String nombreArtista = cancion.getAlbum().getArtista().getNombre();
     String nombreAlbum = cancion.getAlbum().getNombre();
     Integer anioAlbum = cancion.getAlbum().getAnio();
-    return String.format("%s - %s (%s - %d))", tituloCancion, nombreArtista, nombreAlbum, anioAlbum);
+    return String.format("%s - %s (%s - %d)", tituloCancion, nombreArtista, nombreAlbum, anioAlbum);
   }
 }

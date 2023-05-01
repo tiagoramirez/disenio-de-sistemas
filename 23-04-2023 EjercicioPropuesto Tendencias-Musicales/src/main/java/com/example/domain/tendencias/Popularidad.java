@@ -10,7 +10,7 @@ public abstract class Popularidad {
   protected abstract String getLeyenda(Cancion cancion);
 
   public String mostrarDetalle(Cancion cancion) {
-    return getIcono() + getLeyenda(cancion);
+    return getIcono() + " " + getLeyenda(cancion);
   }
 
   public void recibirDislike() {

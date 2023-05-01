@@ -16,7 +16,7 @@ public class Cancion {
   private Popularidad popularidad;
   private Integer cantReproducciones;
   private Integer cantLikes;
-  private Integer cantDislikes;
+  @Getter private Integer cantDislikes;
   private LocalDateTime ultVezEscuchada;
 
   public Cancion() {
@@ -39,10 +39,10 @@ public class Cancion {
 
   public void recibirLike() {
     cantLikes++;
-    popularidad.recibirDislike();
   }
 
   public void recibirDislike() {
     cantDislikes++;
+    popularidad.recibirDislike();
   }
 }

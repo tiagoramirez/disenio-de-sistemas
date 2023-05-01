@@ -38,6 +38,6 @@ public class Normal extends Popularidad {
     String nombreArtista = cancion.getAlbum().getArtista().getNombre();
     String nombreAlbum = cancion.getAlbum().getNombre();
     String tituloCancion = cancion.getTitulo();
-    return String.format("%s - %s - %s)", nombreArtista, nombreAlbum, tituloCancion);
+    return String.format("%s - %s - %s", nombreArtista, nombreAlbum, tituloCancion);
   }
 }
