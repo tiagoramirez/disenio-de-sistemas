@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.example</groupId>
-  <artifactId>validador-correlatividades</artifactId>
+  <artifactId>02-validador-correlatividades</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <name>validador-correlatividades</name>

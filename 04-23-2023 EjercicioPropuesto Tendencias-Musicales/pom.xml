@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.example</groupId>
-  <artifactId>tendencias-musicales</artifactId>
+  <artifactId>03-tendencias-musicales</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <name>tendencias-musicales</name>
