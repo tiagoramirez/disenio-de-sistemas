@@ -1,15 +1,17 @@
 package com.example.exportacion;
 
+import com.example.exportacion.estrategias.ExportarExcel;
+
 public class Exportacion {
   private Exportador exportador;
   private Exportable datos;
 
-  public Exportacion(Exportador exportador) {
-    this.exportador = exportador;
+  public Exportacion() {
+    this.exportador = new ExportarExcel();
   }
 
-  public void exportar() {
-    exportador.exportar(datos);
+  public String exportar() {
+    return exportador.exportar(datos);
   }
 
   public void cambiarExportador(Exportador exportador) {
