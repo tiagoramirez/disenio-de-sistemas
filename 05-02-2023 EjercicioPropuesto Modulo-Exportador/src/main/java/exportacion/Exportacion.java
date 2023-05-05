@@ -1,6 +1,8 @@
-package com.example.exportacion;
+package exportacion;
 
-import com.example.exportacion.estrategias.ExportarExcel;
+import exportacion.datos.Exportable;
+import exportacion.estrategias.Exportador;
+import exportacion.estrategias.excel.ExportarExcel;
 
 public class Exportacion {
   private Exportador exportador;

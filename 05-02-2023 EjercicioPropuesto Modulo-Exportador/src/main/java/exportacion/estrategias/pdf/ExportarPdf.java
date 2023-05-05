@@ -1,7 +1,7 @@
-package com.example.exportacion.estrategias;
+package exportacion.estrategias.pdf;
 
-import com.example.exportacion.Exportable;
-import com.example.exportacion.Exportador;
+import exportacion.datos.Exportable;
+import exportacion.estrategias.Exportador;
 
 public class ExportarPdf implements Exportador {
 

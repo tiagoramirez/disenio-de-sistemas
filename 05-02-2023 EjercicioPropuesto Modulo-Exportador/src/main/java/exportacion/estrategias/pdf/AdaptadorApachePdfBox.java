@@ -1,6 +1,6 @@
-package com.example.exportacion.estrategias;
+package exportacion.estrategias.pdf;
 
-import com.example.exportacion.Exportable;
+import exportacion.datos.Exportable;
 
 public class AdaptadorApachePdfBox implements AdaptadorExportarPdf {
 

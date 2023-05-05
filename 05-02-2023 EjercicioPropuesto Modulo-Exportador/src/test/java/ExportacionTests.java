@@ -1,5 +1,3 @@
-package test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.HashMap;
@@ -9,11 +7,11 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.example.exportacion.Exportacion;
-import com.example.exportacion.datos.Documento;
-import com.example.exportacion.estrategias.AdaptadorApachePdfBox;
-import com.example.exportacion.estrategias.ExportarExcel;
-import com.example.exportacion.estrategias.ExportarPdf;
+import exportacion.Exportacion;
+import exportacion.datos.Documento;
+import exportacion.estrategias.excel.ExportarExcel;
+import exportacion.estrategias.pdf.AdaptadorApachePdfBox;
+import exportacion.estrategias.pdf.ExportarPdf;
 
 public class ExportacionTests {
   Exportacion exportacion = new Exportacion();

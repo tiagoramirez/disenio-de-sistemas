@@ -1,9 +1,7 @@
-package com.example.exportacion.datos;
+package exportacion.datos;
 
 import java.util.List;
 import java.util.Map;
-
-import com.example.exportacion.Exportable;
 
 public class Documento implements Exportable {
 
