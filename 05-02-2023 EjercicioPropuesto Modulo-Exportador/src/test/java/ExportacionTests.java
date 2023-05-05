@@ -1,9 +1,5 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,38 +10,45 @@ import exportacion.estrategias.pdf.AdaptadorApachePdfBox;
 import exportacion.estrategias.pdf.ExportarPdf;
 
 public class ExportacionTests {
-  Exportacion exportacion = new Exportacion();
+  private Exportacion exportacion = new Exportacion();
+  private Documento datos;
 
   @BeforeEach
   public void init() {
-    Map<String, List<String>> datosIniciales = new HashMap<String, List<String>>();
-    datosIniciales.put("nombres", List.of("Tiago", "Pepe", "Juan"));
-    Documento datos = new Documento(datosIniciales);
-    exportacion.setDatos(datos);
+    datos = new Documento();
+    datos.agregarDatos("0", "Nombre", "Apellido", "Usuario");
+    datos.agregarDatos("1", "Tiago", "Ramirez", "tiagoramirez");
+    datos.agregarDatos("2", "Samuel", "De Luque", "vegetta777");
   }
 
   @Test
   public void exportaPorDefectoExcel() {
+    datos.agregarDatos("3", "Juan", "Perez", "juanperez");
+    exportacion.setDatos(datos);
     String resultado = exportacion.exportar();
-    assertEquals("Exportado datos a Excel...", resultado);
+    assertEquals("(4) Exportado datos a Excel...", resultado);
   }
 
   @Test
   public void exportaPdfConApachePdfBox() {
+    exportacion.setDatos(datos);
     AdaptadorApachePdfBox adaptadorPdf = new AdaptadorApachePdfBox();
     exportacion.cambiarExportador(new ExportarPdf(adaptadorPdf));
     String resultado = exportacion.exportar();
-    assertEquals("Exportado con Apache PDFBox...", resultado);
+    assertEquals("(3) Exportado con Apache PDFBox...", resultado);
   }
 
   @Test
   public void exportarCambiandoExcel() {
+    datos.agregarDatos("3", "Juan", "Perez", "juanperez");
+    datos.agregarDatos("4", "Pedro", "Gomez", "pedrogomez");
+    exportacion.setDatos(datos);
     AdaptadorApachePdfBox adaptadorPdf = new AdaptadorApachePdfBox();
     exportacion.cambiarExportador(new ExportarPdf(adaptadorPdf));
     // Aca cambiado a pdf con apache pdfbox
     ExportarExcel exportarExcel = new ExportarExcel();
     exportacion.cambiarExportador(exportarExcel);
     String resultado = exportacion.exportar();
-    assertEquals("Exportado datos a Excel...", resultado);
+    assertEquals("(5) Exportado datos a Excel...", resultado);
   }
 }
