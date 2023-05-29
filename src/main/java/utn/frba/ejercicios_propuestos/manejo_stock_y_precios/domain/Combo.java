@@ -1,10 +1,15 @@
 package utn.frba.ejercicios_propuestos.manejo_stock_y_precios.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Combo extends Producto {
 	private List<Producto> productos;
+
+	public Combo() {
+		productos = new ArrayList<Producto>();
+	}
 
 	@Override
 	public Integer obtenerStock() {

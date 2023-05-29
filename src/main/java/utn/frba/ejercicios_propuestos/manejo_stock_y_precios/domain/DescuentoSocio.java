@@ -1,10 +1,11 @@
 package utn.frba.ejercicios_propuestos.manejo_stock_y_precios.domain;
 
 public class DescuentoSocio extends ProductoDecorado {
-	private Double valor;
+	private Double descuento;
 
-	public DescuentoSocio(Producto producto) {
+	public DescuentoSocio(Producto producto, Double descuento) {
 		super(producto);
+		this.descuento = descuento;
 	}
 
 	@Override
@@ -14,10 +15,6 @@ public class DescuentoSocio extends ProductoDecorado {
 
 	@Override
 	public Double obtenerPrecio() {
-		return producto.obtenerPrecio() * obtenerMultiplicadorDescuento();
-	}
-
-	private Double obtenerMultiplicadorDescuento() {
-		return (100 - valor) / 100;
+		return producto.obtenerPrecio() - descuento;
 	}
 }
