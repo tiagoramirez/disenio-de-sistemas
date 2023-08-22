@@ -1,0 +1,40 @@
+Usuario:
+	- recetas:Receta[] <- 1..*
+	* agregarReceta(Receta receta):void
+	* modificarReceta(Receta recetaVieja,Receta recetaNueva):void
+	* eliminarReceta(Receta receta):void
+	* obtenerRecetasDeUsuarios():Receta[]
+Receta:
+	- conector:Contector
+	- filtros:Filtro[] <- 0..*
+	- accion:Accion
+	* detectarOcurrenciaEvento():void
+	*- obtenerDatosConector():String
+	*- evaluarFiltros(datos:String):Boolean
+	*- ejecutarAccion(datos:String):void
+	* agregarFiltro(Filtro filtro)
+	* modificarFiltro(Filtro filtroViejo,Filtro filtroNuevo):void
+	* eliminarFiltro(Filtro filtro):void
+Conector(ABS):
+	*abs recibirDatosEvento():String
+ConectorConsultaPeriodica extends IConector:
+	- tipo: EstrategiaConsulta
+	- credenciales: String
+	- perioricidad: Integer
+	- detalleConsulta: String
+EstrategiaConsulta(I):
+	*abs consultar(credenciales:String,detalleConsulta:String):String
+ConectorEspera extends Conector;
+Filtro:
+	- condiciones:Condicion[]
+	* evaluarCondiciones(datos:String): Boolean
+Condicion:
+	- adaptador:AdaptadorEvaluador
+	* evaluar(datos:String):Boolean
+AdaptadorEvaluador(I):
+	* evaluar(datos:String):Boolean
+Accion:
+	-adaptador:AdaptadorAccionador
+	* realizarAccion(datos:String):void
+AdaptadorAccionador(I):
+	*realizarAccion(datos:String):void
