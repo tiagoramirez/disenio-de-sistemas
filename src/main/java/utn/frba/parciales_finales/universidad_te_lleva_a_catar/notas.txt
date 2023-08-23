@@ -1,0 +1,112 @@
+X Sorteo(singleton):
+	- participantes:Participante[]
+	- dniReferidos:Integer[]
+	- adaptador:AdaptadorInformacionUniversitaria
+	* agregarParticipante(participante:Participante)
+	* -obtenerInformacionUniversitaria(dni:Integer):Universidad
+	* obtenerChancesOtorgadas():Double
+	* cantidadParticipantes():Integer
+	* existeReferido(dni:Integer):Boolean
+X AdaptadorInformacionUniversitaria(I):
+	* obtenerInformacionUniversitaria(dni:Integer):Universidad
+X Universidad:
+	- tipo:TipoUniversidad
+	- regional:String //vacio si es de otra universidad
+	- materiasCursadas:Integer
+	- materiasAprobadas:Integer
+X TipoUniversidad(ENUM):
+	- UDDS
+	- OTRA
+X Participante:
+	- nombre:String
+	- apellido:String
+	- edad: Integer
+	- mail: String
+	- dni: Integer
+	- universidad:Universidad
+	- mediosDeContacto:EstrategiaContacto[]
+	- referidos:Referido[]
+	- categoria:Categoria
+	* invitarParticipar(email:String, dni:Integer):void <- va a checkear que no exista el referido con el singleton sorteo y generarlo
+	* avisarReferidoAceptado(referido:Referido):void <- va a llamar al revisar categoria
+	*- revisarCategoria():void
+	* recibirPagoCategoria(pago:Double):void
+	* cambiarCategoria(categoriaNueva:Categoria):void
+	* cantidadReferidosAceptados():Integer
+	* cantidadReferidosMismaRegional():Integer
+	* cantidadReferidosDistintaRegional():Integer
+	* cantidadReferidosOtraUniversidad():Integer
+	* esDeLaUniversidad():Boolean
+	* obtenerReferidos():Referido[]
+	* obtenerProbabilidadDeGanar():Double
+X EstrategiaContacto(ABS):
+	- destinatario:String
+	* contactar(mensaje:String)
+X Referido:
+	- participanteQueLoInvito:Participante
+	- email:String
+	- dni:Integer
+	- aceptado:Boolean
+	- fechaAceptacion:Datetime
+	- fechaInvitacion:Datetime
+	* aceptarSolicitud(datos:DatosAceptacion):void <- va a generar un nuevo participante y avisa a su invitador
+X DatosAceptacion:
+	- nombre:String
+	- apellido:String
+	- edad:Integer
+	- mediosDeContacto:EstrategiaContacto[]
+X Categoria(ABS):
+	- nombre:String
+	- multiplicadorChance:Double
+	- costo:Double
+	- cantidadReferidosMax:Integer
+	* cambiarMultiplicador(nuevoMultiplicador:Double):void <- usado por admin en capa controlador
+	* cambiarCosto(nuevoCosto:Double):void <- usado por admin en capa controlador
+	* (abs) nuevoReferidoAceptado(participante:Participante): void
+	*- superaReferidos(participante:Participante):Boolean
+
+@override
+public void nuevoReferidoAceptado(participante:Participante){ // Para bronce
+	if(superaReferidos(participante)){
+		participante.cambiarCategoria(new CategoriaPlata)
+	}
+}
+private Boolean superaReferidos(participante:Participante){ // Para todos
+	if(cantidadReferidosMax <= participante.cantidadReferidosAceptados()){
+		return true;
+	}
+	return true;
+}
+X CalculadorProbabilidad (static):
+	- chancesPorMateriasCursadas:Double (0.5)
+	- chancesPorMateriasAprobadas:Double (0.5)
+	- chancesPorReferidosMismaRegional:Double (2)
+	- chancesPorReferidosDistintaRegional:Double (1)
+	- chancesPorReferidosOtraUniversidad:Double (0.5)
+	- chancesParticipantesOtraUniversidad:Double (1)
+	*- obtenerChancesMateriasCursadas(estudiante:Participante):Double
+	*- obtenerChancesMateriasAprobadas(estudiante:Participante):Double
+	*- obtenerChancesReferidosAceptadosMismaRegional(estudiante:Participante):Double
+	*- obtenerChancesReferidosAceptadosDistintaRegional(estudiante:Participante):Double
+	*- obtenerChancesReferidosAceptadosOtraUniversidad(estudiante:Participante):Double
+	*- obtenerChancesParticipantesOtraUniversidad(participante:Participante):Double
+	* static calcular(participante:Participante):Double <- usa al sorteo singleton
+public static Double calcular(participante:Participante){
+	Double probabilidadFinal=0;
+	Double chances = 0;
+	if(participante.esDeLaUniversidad()){
+		chances+=this.obtenerChancesMateriasCursadas(participante)
+		chances+=this.obtenerChancesMateriasAprobadas(participante)
+		chances+=this.obtenerChancesReferidosAceptadosMismaRegional(participante)
+		chances+=this.obtenerChancesReferidosAceptadosDistintaRegional(participante)
+		chances+=this.obtenerChancesReferidosAceptadosOtraUniversidad(participante)
+	}
+	else{
+		chances+=this.obtenerChancesParticipantesOtraUniversidad(participante)
+	}
+	Integer multiplicadorCategoria=participante.getCategoria().getMultiplicador();
+	Integer chancesFinal= multiplicadorCategoria*chances;
+	Sorteo sorteo = Sorteo.getInstance();
+	probabilidadFinal=chancesFinal/(sorteo.obtenerChancesOtorgadas()*sorteo.cantidadParticipantes()) <- sorteo singleton
+	return probabilidadFinal;
+}
