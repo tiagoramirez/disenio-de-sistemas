@@ -7,14 +7,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table
+@Table(name = "servicio")
 @Getter
 @Setter
 public class Servicio {
@@ -25,7 +25,8 @@ public class Servicio {
     @Column
     private String nombre;
 
-    @Transient
+    // mappedBy = "Encontrame en la otra clase como el atributo 'servicio'"
+    @OneToMany(mappedBy = "servicio")
     private List<Tarea> tareas;
 
     public Servicio() {
