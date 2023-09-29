@@ -1,4 +1,4 @@
-package utn.frba.ejercicios_propuestos.pro_services.dominio.prestador;
+package utn.frba.ejercicios_propuestos.pro_services.dominio.servicios;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +16,7 @@ import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
-import utn.frba.ejercicios_propuestos.pro_services.dominio.servicios.Servicio;
-import utn.frba.ejercicios_propuestos.pro_services.dominio.servicios.Tarea;
+import utn.frba.ejercicios_propuestos.pro_services.dominio.actores.Prestador;
 
 @Entity
 @Table(name = "servicio_ofrecido")

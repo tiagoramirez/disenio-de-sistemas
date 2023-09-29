@@ -1,4 +1,4 @@
-package utn.frba.ejercicios_propuestos.pro_services.dominio.prestador;
+package utn.frba.ejercicios_propuestos.pro_services.dominio.actores;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

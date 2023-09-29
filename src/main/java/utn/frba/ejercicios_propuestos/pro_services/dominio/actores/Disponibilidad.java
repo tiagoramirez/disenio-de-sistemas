@@ -1,4 +1,4 @@
-package utn.frba.ejercicios_propuestos.pro_services.dominio.prestador;
+package utn.frba.ejercicios_propuestos.pro_services.dominio.actores;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
-import utn.frba.ejercicios_propuestos.pro_services.dominio.converters.DiaDeLaSemanaAttributeConverter;
+import utn.frba.ejercicios_propuestos.pro_services.datos.converters.DiaDeLaSemanaAttributeConverter;
 
 @Entity
 @Table(name = "disponibilidad")

@@ -1,4 +1,4 @@
-package utn.frba.ejercicios_propuestos.pro_services.dominio.converters;
+package utn.frba.ejercicios_propuestos.pro_services.datos.converters;
 
 import java.sql.Date;
 import java.time.LocalDate;
