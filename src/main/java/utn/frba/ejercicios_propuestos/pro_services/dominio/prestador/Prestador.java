@@ -1,6 +1,8 @@
 package utn.frba.ejercicios_propuestos.pro_services.dominio.prestador;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -66,4 +68,27 @@ public class Prestador {
 
     @Transient
     private Reputacion reputacion;
+
+    public Prestador() {
+        this.emails = new HashSet<String>();
+        this.telefonos = new HashSet<String>();
+        this.disponibilidades = new ArrayList<Disponibilidad>();
+    }
+
+    public Prestador(String nombre, String apellido, String nroDocumento, TipoDocumento tipoDocumento,
+            LocalDate fechaNacimiento, String cuitCuil, Set<String> emails, Set<String> telefonos,
+            List<Disponibilidad> disponibilidades) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.foto = "";
+        this.nroDocumento = nroDocumento;
+        this.tipoDocumento = tipoDocumento;
+        this.fechaNacimiento = fechaNacimiento;
+        this.cuitCuil = cuitCuil;
+        this.emails = emails;
+        this.telefonos = telefonos;
+        this.disponibilidades = disponibilidades;
+        this.reputacion = new Reputacion();
+    }
+
 }

@@ -34,4 +34,13 @@ public class Disponibilidad {
 
     @Column(columnDefinition = "TIME")
     private LocalTime horaFin;
+
+    public Disponibilidad() {
+    }
+
+    public Disponibilidad(DayOfWeek dia, LocalTime horaInicio, LocalTime horaFin) {
+        this.dia = dia;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+    }
 }
