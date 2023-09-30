@@ -2,24 +2,19 @@ package utn.frba.ejercicios_propuestos.pro_services.dominio.servicios;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
+import utn.frba.ejercicios_propuestos.pro_services.datos.Persistente;
 
 @Entity
 @Table(name = "tarea")
 @Getter
 @Setter
-public class Tarea {
-    @Id
-    @GeneratedValue
-    private Long id;
-
+public class Tarea extends Persistente {
     @Column
     private String nombre;
 
@@ -41,6 +36,6 @@ public class Tarea {
 
     @Override
     public String toString() {
-        return String.format("[%d] %s - %s", this.id, this.nombre, this.descripcion);
+        return String.format("%s - %s", this.nombre, this.descripcion);
     }
 }

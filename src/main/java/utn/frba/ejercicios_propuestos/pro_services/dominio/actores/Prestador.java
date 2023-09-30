@@ -12,8 +12,6 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -21,16 +19,13 @@ import javax.persistence.Transient;
 
 import lombok.Getter;
 import lombok.Setter;
+import utn.frba.ejercicios_propuestos.pro_services.datos.Persistente;
 
 @Entity
 @Table(name = "prestador")
 @Getter
 @Setter
-public class Prestador {
-    @Id
-    @GeneratedValue
-    private Long id;
-
+public class Prestador extends Persistente {
     @Column
     private String nombre;
 

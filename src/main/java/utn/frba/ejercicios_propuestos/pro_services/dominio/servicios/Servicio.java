@@ -6,23 +6,18 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
+import utn.frba.ejercicios_propuestos.pro_services.datos.Persistente;
 
 @Entity
 @Table(name = "servicio")
 @Getter
 @Setter
-public class Servicio {
-    @Id
-    @GeneratedValue
-    private Long id;
-
+public class Servicio extends Persistente {
     @Column
     private String nombre;
 
