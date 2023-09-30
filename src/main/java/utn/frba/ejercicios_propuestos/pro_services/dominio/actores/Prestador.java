@@ -14,12 +14,14 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import lombok.Getter;
 import lombok.Setter;
 import utn.frba.ejercicios_propuestos.pro_services.datos.Persistente;
+import utn.frba.ejercicios_propuestos.pro_services.dominio.actores.reputaciones.Reputacion;
+import utn.frba.ejercicios_propuestos.pro_services.dominio.actores.reputaciones.ReputacionBuena;
 
 @Entity
 @Table(name = "prestador")
@@ -61,7 +63,8 @@ public class Prestador extends Persistente {
     @JoinColumn(name = "prestador_id", referencedColumnName = "id")
     private List<Disponibilidad> disponibilidades;
 
-    @Transient
+    @OneToOne
+    @JoinColumn(name = "reputacion_id", referencedColumnName = "id")
     private Reputacion reputacion;
 
     public Prestador() {
@@ -83,7 +86,7 @@ public class Prestador extends Persistente {
         this.emails = emails;
         this.telefonos = telefonos;
         this.disponibilidades = disponibilidades;
-        this.reputacion = new Reputacion();
+        this.reputacion = new ReputacionBuena();
     }
 
 }
