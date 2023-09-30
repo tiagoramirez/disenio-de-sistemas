@@ -3,6 +3,7 @@ package utn.frba.ejercicios_propuestos.pro_services.dominio.servicios;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class Servicio {
     private String nombre;
 
     // mappedBy = "Encontrame en la otra clase como el atributo 'servicio'"
-    @OneToMany(mappedBy = "servicio")
+    @OneToMany(mappedBy = "servicio", cascade = CascadeType.ALL)
     private List<Tarea> tareas;
 
     public Servicio() {
