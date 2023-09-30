@@ -14,6 +14,8 @@ import utn.frba.ejercicios_propuestos.pro_services.dominio.trabajos.Trabajo;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+// --- Estrategia joined: Cada clase en una tabla distinta (Quitar DiscriminatorColumn)
+// @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "reputacion")
 @DiscriminatorColumn(name = "tipo")
 public abstract class Reputacion extends Persistente {

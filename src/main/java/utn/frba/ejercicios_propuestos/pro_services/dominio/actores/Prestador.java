@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -20,8 +21,10 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import utn.frba.ejercicios_propuestos.pro_services.datos.Persistente;
+import utn.frba.ejercicios_propuestos.pro_services.datos.converters.MedioNotificacionAttributeConverter;
 import utn.frba.ejercicios_propuestos.pro_services.dominio.actores.reputaciones.Reputacion;
 import utn.frba.ejercicios_propuestos.pro_services.dominio.actores.reputaciones.ReputacionBuena;
+import utn.frba.ejercicios_propuestos.pro_services.dominio.notificaciones.MedioNotificacion;
 
 @Entity
 @Table(name = "prestador")
@@ -66,6 +69,9 @@ public class Prestador extends Persistente {
     @OneToOne
     @JoinColumn(name = "reputacion_id", referencedColumnName = "id")
     private Reputacion reputacion;
+
+    @Convert(converter = MedioNotificacionAttributeConverter.class)
+    private MedioNotificacion medioNotificacion;
 
     public Prestador() {
         this.emails = new HashSet<String>();

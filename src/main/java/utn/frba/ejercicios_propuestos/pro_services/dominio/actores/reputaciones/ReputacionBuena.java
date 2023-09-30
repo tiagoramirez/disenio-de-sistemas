@@ -9,6 +9,8 @@ import utn.frba.ejercicios_propuestos.pro_services.dominio.trabajos.Calificacion
 import utn.frba.ejercicios_propuestos.pro_services.dominio.trabajos.Trabajo;
 
 @Entity
+// --- Estrategia joined: Cada clase en una tabla distinta (Quitar DiscriminatorValue)
+// @Table(name = "reputacion_buena")
 @DiscriminatorValue("buena")
 public class ReputacionBuena extends Reputacion {
     @Column
